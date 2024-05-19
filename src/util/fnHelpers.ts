@@ -20,7 +20,7 @@ export function hexGenerator () {
 
 export function carsGenerator() {
   const res = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 100; i++) {
       res.push({
         name: `${brands[Math.floor(Math.random() * brands.length)]} ${models[Math.floor(Math.random() * models.length)]}`,
         color: hexGenerator()
@@ -33,7 +33,7 @@ export function animateCar(duration:number, finishPosition:number) {
   const keyframes = `
   @keyframes Drive {
       0% { left: 0; }
-      100% { left: ${finishPosition + 30}px; }
+      100% { left: ${finishPosition + 15}px; }
   }
 `;
   const stylesForAnimation = {
@@ -59,7 +59,3 @@ export async function getCarParams (id:number, name:string, distance:number) {
   }
 }
 
-/* export async function offEnginesOfCars(id:number) {
-  await apiService.engineCar(id, false);
-}
- */

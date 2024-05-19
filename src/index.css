@@ -34,7 +34,6 @@ h1 {
 }
 
 button {
-  border-width: 2px solid;
   border-image: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
   border-image-slice: 1;
   padding: 0.3em 1em;
@@ -51,4 +50,26 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+svg {
+  width: 60px;
+  height: 60px;
+}
+@media screen and (max-width: 1150px) {
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media screen and (max-width: 855px) {
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media screen and (max-width: 600px) {
+  button {
+    font-size: 0.6em;
+    padding: 0.5em;
+  }
 }

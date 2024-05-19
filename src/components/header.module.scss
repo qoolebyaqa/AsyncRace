@@ -5,8 +5,17 @@
   justify-content: space-around;
   ul {
     list-style-type: none;
+    padding: 0;
   }
 }
 .header__Img {
   width: 250px;
+}
+@media screen and (max-width: 660px) {
+  .header h1 {
+    font-size: 28px;
+  }
+  .header__Img {
+    width: 100px;
+  }
 }

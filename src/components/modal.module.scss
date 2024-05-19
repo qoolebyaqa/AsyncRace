@@ -32,3 +32,21 @@
     background: transparent;
   }
 }
+@media screen and (max-width: 1150px) {
+  .modal__details__name {
+    width: 60%;
+    font-size: 50px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .modal__details__name {
+    width: 40%;
+    font-size: 32px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .modal__details__name {
+    width: 40%;
+    font-size: 22px;
+  }
+}

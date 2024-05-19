@@ -1,6 +1,7 @@
 .form {
   display: flex;
   gap: 0.5rem;
+  width: 25%;
   input {
     border-radius: 8px;    
     height: 25px;
@@ -15,5 +16,11 @@
     padding: 0 15px;
     border-image: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
     border-image-slice: 1;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .form {
+    flex-direction: column;
   }
 }

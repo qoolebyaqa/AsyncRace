@@ -21,7 +21,7 @@ function Pagination() {
   }
   return ( <>
   <div className={styles.paginationWrap}>
-    <p className={styles.totalQuantity}>GARAGE ({cars.length})</p>
+    <div className={styles.totalQuantity}>GARAGE ({cars.length})</div>
     <div className={styles.paginationButtons}>
       <button onClick={handlePreviousPage} disabled={currentPage === 1}>↩</button>
       <p>{currentPage}</p>
