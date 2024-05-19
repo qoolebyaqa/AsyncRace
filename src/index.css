@@ -34,7 +34,16 @@ h1 {
 }
 
 button {
-  border-image: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+  border-image: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
   border-image-slice: 1;
   padding: 0.3em 1em;
   font-size: 0.8em;

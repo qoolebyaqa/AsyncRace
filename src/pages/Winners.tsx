@@ -1,9 +1,11 @@
-import WinnersTable from "../components/WinnersTable";
+import WinnersTable from '../components/WinnersTable';
 
 function Winners() {
-  return ( <section>
-    <WinnersTable />
-  </section> );
+  return (
+    <section>
+      <WinnersTable />
+    </section>
+  );
 }
 
 export default Winners;

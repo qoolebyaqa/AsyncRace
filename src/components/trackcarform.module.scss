@@ -3,7 +3,7 @@
   gap: 0.5rem;
   width: 25%;
   input {
-    border-radius: 8px;    
+    border-radius: 8px;
     height: 25px;
   }
 }
@@ -11,10 +11,19 @@
   position: absolute;
   z-index: 5;
   top: 140px;
-  svg {    
+  svg {
     border: 2px solid;
     padding: 0 15px;
-    border-image: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+    border-image: linear-gradient(
+      to right,
+      red,
+      orange,
+      yellow,
+      green,
+      cyan,
+      blue,
+      violet
+    );
     border-image-slice: 1;
   }
 }

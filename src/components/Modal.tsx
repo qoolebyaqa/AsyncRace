@@ -16,14 +16,24 @@ function Modal() {
       await offEnginesOfCars(car.id);
     }) */
   }
-  return ( <div className={styles.wrapper__modal}>
-    <div className={styles.modal__details}>
-      <div className={styles.modal__details__name}>        
-        <p>{winner[0].name} won this race with the best time {winner[0].duration} seconds</p>
-        <button onClick={handleOkClick}>OK</button>
+  return (
+    <div className={styles.wrapper__modal}>
+      <div className={styles.modal__details}>
+        <div className={styles.modal__details__name}>
+          <p>
+            {winner[0].name}
+            {' '}
+            won this race with the best time
+            {' '}
+            {winner[0].duration}
+            {' '}
+            seconds
+          </p>
+          <button onClick={handleOkClick}>OK</button>
+        </div>
       </div>
     </div>
-  </div> );
+  );
 }
 
 export default Modal;

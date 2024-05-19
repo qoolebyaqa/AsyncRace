@@ -1,4 +1,4 @@
-.wrapper__modal{
+.wrapper__modal {
   z-index: 10;
   position: fixed;
   top: 0;
@@ -20,10 +20,19 @@
 }
 
 .modal__details {
-  background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+  background: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #0B2349;
+  color: #0b2349;
   display: table;
   margin: 20px auto;
   font-weight: 700;
