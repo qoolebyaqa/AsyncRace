@@ -4,7 +4,7 @@ import { trackState } from '../types';
 
 const trackSlice = createSlice({
   name: "trackControl",
-  initialState: {cars: [], startRace: false, distance: 0, winner: [], selectedCar: null, visibleCars: [], renderedCarsWithParams: [], currentPage: 1, carsActivatedManualy: [], pending: false, winnersTable: [], currentWinnersPage: 1} as trackState,
+  initialState: {cars: [], startRace: false, distance: 0, winner: [], selectedCar: null, visibleCars: [], renderedCarsWithParams: [], currentPage: 1, carsActivatedManualy: [], pending: false, winnersTable: [], currentWinnersPage: 1, allWinners: []} as trackState,
   reducers: {
     setTotalCars(state, action) {
       state.cars = action.payload;
@@ -91,11 +91,11 @@ const trackSlice = createSlice({
     setDistance(state, action) {
       state.distance = action.payload;
     },
-    setPendingTrue(state) {
-      state.pending = true;
+    setNextPageWinners(state) {
+      state.currentWinnersPage++;
     },
-    setPendingFalse(state) {
-      state.pending = false;
+    setPrevPageWinners(state) {
+      state.currentWinnersPage--;
     },
     pushToWinnersTable(state, action) {
       if(state.winnersTable.filter(winner => winner.id === action.payload.id).length === 1) {
@@ -115,7 +115,16 @@ const trackSlice = createSlice({
       } else {
         state.winnersTable.push(action.payload);
       }
-    }
+    },
+    clearWinnerTable(state) {
+      state.winnersTable = []
+    },
+    deleteWinnerFromTable(state, action) {
+      state.winnersTable = state.winnersTable.filter(winner => winner.id !== action.payload);
+    },
+    setAllWinners(state, action) {
+      state.allWinners = action.payload
+    }  
   }
 });
 

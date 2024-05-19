@@ -59,6 +59,12 @@ class ApiService {
     return respConverted;
   }
 
+  async getWinner (id: number): Promise<IWinRes> {
+    const resp = await fetch(`${this.baseUrl}/winners/${id}`);
+    const respConverted = await resp.json();
+    return respConverted;
+  }
+
   async getWinners (query?: string): Promise<IWinRes[]> {
     const resp = await fetch(`${this.baseUrl}/winners?${query}`)
     const respConverted = await resp.json();
@@ -87,6 +93,12 @@ class ApiService {
   });
   const updatedWinner = await resp.json();
   return updatedWinner;
+  }
+
+  async deleteWinner(id: number) {
+    await fetch(`${this.baseUrl}/winners/${id}`, {
+      method: 'DELETE'
+    });
   }
 
 

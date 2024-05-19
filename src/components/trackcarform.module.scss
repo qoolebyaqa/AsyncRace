@@ -6,3 +6,14 @@
     height: 25px;
   }
 }
+.prview {
+  position: absolute;
+  z-index: 5;
+  top: 140px;
+  svg {    
+    border: 2px solid;
+    padding: 0 15px;
+    border-image: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+    border-image-slice: 1;
+  }
+}

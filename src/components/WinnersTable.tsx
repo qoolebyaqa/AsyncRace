@@ -8,39 +8,49 @@ import { queryForWinners } from "../util/fnHelpers";
 import { trackActions } from "../util/redux/trackSlice";
 
 function WinnersTable() {
-  const WINNERS = useSelector(
+  const winnersTable = useSelector(
     (state: GlobalStateType) => state.Track.winnersTable
   );
   const currentWinnersPage = useSelector(
     (state: GlobalStateType) => state.Track.currentWinnersPage
   );
-  const totalCars = useSelector(
-    (state: GlobalStateType) => state.Track.cars
+  const totalWinners = useSelector(
+    (state: GlobalStateType) => state.Track.allWinners
   );
   const dispatch = useDispatch();
 
   useEffect(() => {
     async function initWinnersFetching() {
+      dispatch(trackActions.clearWinnerTable());
+      const allWinners = await apiService.getWinners();
+      dispatch(trackActions.setAllWinners(allWinners));
+      const totalCars = await apiService.getCars();
       const visibleWinners = await apiService.getWinners(queryForWinners(currentWinnersPage));
-      const visibleWinnersToDispatch = visibleWinners.map((winner) => {
+      visibleWinners.map((winner) => {
         for (let i = 0; i < totalCars.length; i++) {
           if(winner.id === totalCars[i].id) {
-            return {
-              id:winner.id, 
+            const mappedWinner = {
+              id: winner.id, 
               name: totalCars[i].name, 
               duration: winner.time, 
               wins: winner.wins, 
               color: totalCars[i].color              
-            }
+            };
+            dispatch(trackActions.pushToWinnersTable(mappedWinner)); 
           }
         }
       });
-      visibleWinnersToDispatch.forEach((winner) => {
-        dispatch(trackActions.pushToWinnersTable(winner));
-      });   
     }
+  
     initWinnersFetching();
-  }, [])
+  }, [currentWinnersPage]);
+
+  async function handleNextPage() {
+    dispatch(trackActions.setNextPageWinners());
+  }
+  async function handlePrevPage() {
+    dispatch(trackActions.setPrevPageWinners());
+  }
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
@@ -54,7 +64,7 @@ function WinnersTable() {
           </tr>
         </thead>
         <tbody>
-          {WINNERS.length > 0 && WINNERS.map((winner) => {
+          {winnersTable.length > 0 && winnersTable.map((winner) => {
             return (
               <tr key={winner.id}>
                 <td>{winner.id}</td>
@@ -70,9 +80,9 @@ function WinnersTable() {
         </tbody>
       </table>
       <div className={styles.paginationButtons}>
-        <button>↩</button>
-        <p>1</p>
-        <button>↪</button>
+        <button onClick={handlePrevPage} disabled={currentWinnersPage === 1}>↩</button>
+        <p>{currentWinnersPage}</p>
+        <button onClick={handleNextPage} disabled={currentWinnersPage === Math.ceil(totalWinners.length/7)}>↪</button>
       </div>
     </div>
   );

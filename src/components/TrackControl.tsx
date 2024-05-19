@@ -5,6 +5,7 @@ import TrackCarControlForm from "./TrackCarControlForm";
 import styles from "./trackcontrol.module.scss";
 import { trackActions } from "../util/redux/trackSlice";
 import { GlobalStateType } from "../util/types";
+import { useState } from "react";
 
 function TrackControl() {
   const distance = useSelector(
@@ -16,12 +17,7 @@ function TrackControl() {
   const visibleCars = useSelector(
     (state: GlobalStateType) => state.Track.visibleCars
   );
-  const startRace = useSelector(
-    (state: GlobalStateType) => state.Track.startRace
-  );
-  /* const renderedCarsWithParams = useSelector(
-    (state: GlobalStateType) => state.Track.renderedCarsWithParams
-  ); */
+  const [btnDisabled, setBtnDisabled] = useState(false);
   const dispatch = useDispatch();
 
   async function handleGeneratingCars() {
@@ -35,6 +31,7 @@ function TrackControl() {
   }
 
   async function handleStartRace() {
+    setBtnDisabled(true);
     dispatch(trackActions.excludeAllFromCarsActivatedManualy());
     const promisesForCars = visibleCars.map(async(car) => {
       const params = await getCarParams(car.id, car.name, distance);
@@ -54,9 +51,7 @@ function TrackControl() {
     await Promise.all(driveModePromises);    
   }
   function handleResetRace() {
-    /* visibleCars.map(async(car) => {
-      await offEnginesOfCars(car.id);
-    }) */
+    setBtnDisabled(false);
     dispatch(trackActions.excludeAllFromCarsActivatedManualy());
     dispatch(trackActions.setResetRace());
     dispatch(trackActions.resetRaceWinner());
@@ -64,12 +59,12 @@ function TrackControl() {
   return (
     <div className={styles.trackControl}>
       <div className={styles.raceButtons}>
-        <button onClick={handleStartRace} disabled={startRace}>RACE ▶</button>
-        <button onClick={handleResetRace} disabled={!startRace}>RESET ↻</button>
+        <button onClick={handleStartRace} disabled={btnDisabled}>RACE ▶</button>
+        <button onClick={handleResetRace} disabled={!btnDisabled}>RESET ↻</button>
       </div>
       <TrackCarControlForm titleBtn="CREATE" />
       <TrackCarControlForm titleBtn="UPDATE" />
-      <button onClick={handleGeneratingCars} disabled={startRace}>GENERATE CARS</button>
+      <button onClick={handleGeneratingCars} disabled={btnDisabled}>GENERATE CARS</button>
     </div>
   );
 }

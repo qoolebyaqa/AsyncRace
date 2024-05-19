@@ -19,7 +19,7 @@ export interface IEngineRes {
 }
 
 type carToAnimate = {id: number, name: string, duration: number, distance: number, keyframes: string, stylesForAnimation: CSSProperties | undefined}
-type winner = {id:number, name: string, duration: number, wins: number, color: string};
+export type winner = {id:number, name: string, duration: number, wins: number, color: string};
 
 export type trackState = {
   cars: ICarRes[],
@@ -33,6 +33,7 @@ export type trackState = {
   carsActivatedManualy: number[],
   pending: boolean,
   winnersTable: winner[],
-  currentWinnersPage: number
+  currentWinnersPage: number,
+  allWinners: winner[],
 }
 export type GlobalStateType = ReturnType<typeof store.getState>; 

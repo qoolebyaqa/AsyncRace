@@ -36,7 +36,9 @@ function Participant({ name, color, id }: ICarRes) {
   async function handleRemoveCar() {
     let carsOnPage = [];
     dispatch(trackActions.deleteCarFromTotal(id));
+    dispatch(trackActions.deleteWinnerFromTable(id));
     await apiService.deleteCar(id);
+    await apiService.deleteWinner(id)
     if (currentPage - (totalCars.length - 1) / 7 === 1) {
       dispatch(trackActions.carsOnPrevPage());
       carsOnPage = await apiService.getCars(queryForCars(currentPage - 1, 7));
@@ -71,8 +73,12 @@ function Participant({ name, color, id }: ICarRes) {
         await apiService.createWinner({id, wins: 1, time:Number((newWinnerParams.duration/1000).toFixed(2))});
         dispatch(trackActions.pushToWinnersTable({ id, name, duration: (newWinnerParams.duration/1000).toFixed(2), wins: 1, color }));
       } else {
-        const update = await apiService.updateWinner({id, wins: winnerToCheck.wins + 1, time: winnerToCheck.duration});
-        console.log(update);
+        const dublicateFromAPI = await apiService.getWinner(id);
+        if (dublicateFromAPI.time > Number((newWinnerParams.duration/1000).toFixed(2))) {
+          await apiService.updateWinner({id, wins: winnerToCheck.wins + 1, time: Number((newWinnerParams.duration/1000).toFixed(2))});
+        } else {
+          await apiService.updateWinner({id, wins: winnerToCheck.wins + 1, time: dublicateFromAPI.time});
+        }
         dispatch(trackActions.pushToWinnersTable({ id, name, duration: (newWinnerParams.duration/1000).toFixed(2), wins: winnerToCheck.wins + 1, color }));
       }      
     } else {
