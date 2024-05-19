@@ -11,6 +11,13 @@
     text-align: center;
   }
 }
+.paginationWrap {
+  display: flex;
+  justify-content: space-around;
+}
+.totalQuantity {
+  font-size: 28px;
+}
 .paginationButtons {
   align-self: flex-end;
   margin-right: 20px;

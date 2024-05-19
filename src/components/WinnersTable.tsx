@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import apiService from '../util/http';
 import styles from './winnersTable.module.scss';
 import { GlobalStateType } from '../util/types';
@@ -17,6 +17,7 @@ function WinnersTable() {
   const totalWinners = useSelector(
     (state: GlobalStateType) => state.Track.allWinners,
   );
+  const [ASC, setASC] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,6 +48,14 @@ function WinnersTable() {
     initWinnersFetching();
   }, [currentWinnersPage]);
 
+  /* async function handleSortWinner() {
+    if (ASC) {
+      const sortedWinners = await apiService.getWinners(queryForWinners(currentWinnersPage, undefined, 'ASC', 'time'))
+      dispatch(trackActions.clearWinnerTable());
+      dispatch(trackActions.pushToWinnersTable());
+    }
+  } */
+  
   async function handleNextPage() {
     dispatch(trackActions.setNextPageWinners());
   }
@@ -80,18 +89,22 @@ function WinnersTable() {
             ))}
         </tbody>
       </table>
-      <div className={styles.paginationButtons}>
-        <button onClick={handlePrevPage} disabled={currentWinnersPage === 1}>
+      <div className={styles.paginationWrap}>
+        <div className={styles.totalQuantity}>
+        Winners ({totalWinners.length})
+        </div>
+        <div className={styles.paginationButtons}>
+          <button onClick={handlePrevPage} disabled={currentWinnersPage === 1}>
           ↩
-        </button>
-        <p>{currentWinnersPage}</p>
-        <button
-          onClick={handleNextPage}
-          disabled={currentWinnersPage === Math.ceil(totalWinners.length / 7)}
-        >
-          ↪
-        </button>
-      </div>
+          </button>
+          <p>{currentWinnersPage}</p>
+          <button
+            onClick={handleNextPage}
+            disabled={currentWinnersPage === Math.ceil(totalWinners.length / 7)}
+          >↪
+          </button>
+        </div>
+        </div>
     </div>
   );
 }

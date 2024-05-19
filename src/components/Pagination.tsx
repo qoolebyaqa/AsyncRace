@@ -34,14 +34,13 @@ function Pagination() {
       </div>
       <div className={styles.paginationButtons}>
         <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-          ↩
+        ↩
         </button>
         <p>{currentPage}</p>
         <button
           onClick={handleNextPage}
           disabled={currentPage === Math.ceil(cars.length / 7)}
-        >
-          ↪
+        > ↪
         </button>
       </div>
     </div>
