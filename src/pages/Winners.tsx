@@ -1,6 +1,8 @@
+import WinnersTable from "../components/WinnersTable";
+
 function Winners() {
   return ( <section>
-    <div>Winners</div>
+    <WinnersTable />
   </section> );
 }
 

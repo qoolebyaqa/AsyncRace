@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import headerBG from '/headerBG.jpg';
+import headerBG from '/headerBG.png';
 import styles from './header.module.scss';
 
 function Header() {

@@ -1,0 +1,39 @@
+.participant {
+  display: flex;
+}
+
+.btnContainer {
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+}
+.trackStart {
+  width: 6%;
+  background: url('./startline.jpg');
+  background-size: 80px;
+  background-repeat: no-repeat;
+  border-top: solid 2px;
+}
+.trackFinish {
+  width: 6%;
+  background: url('./finishline.jpg');
+  background-size: 80px;
+  background-repeat: no-repeat;
+  border-top: solid 2px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+  padding-right: 3px;
+}
+.carName {
+  margin: 0;
+  padding-left: 10px;
+  border-top: solid 2px;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  width: 65%;
+}

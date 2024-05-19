@@ -2,8 +2,6 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,9 +21,10 @@ a:hover {
   width: 100%;
 }
 body {
-  margin: 0;
+  margin: 0 auto;
   display: flex;
-  min-width: 1000px;
+  justify-content: center;
+  max-width: 1440px;
   min-height: 100vh;
 }
 
@@ -35,13 +34,14 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  border-width: 2px solid;
+  border-image: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+  border-image-slice: 1;
+  padding: 0.3em 1em;
+  font-size: 0.8em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #ffffff;
   cursor: pointer;
   transition: border-color 0.25s;
 }

@@ -1,0 +1,17 @@
+.paginationWrap {
+  display: flex;
+  justify-content: space-around;
+}
+.paginationButtons {
+  display: flex;
+  gap: 15px;
+  button {
+    height: 40px;
+    border: none;
+    font-size: 32px;
+    padding: 0;
+  }
+}
+.totalQuantity {
+  font-size: 28px;
+}

@@ -1,0 +1,34 @@
+.wrapper__modal{
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(10 10 10 / 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__details__name {
+  font-size: 72px;
+  width: 70%;
+  border: 10px solid rgb(155, 151, 151);
+  padding: 80px;
+  margin: 0 auto;
+}
+
+.modal__details {
+  background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #0B2349;
+  display: table;
+  margin: 20px auto;
+  font-weight: 700;
+  text-align: center;
+  button {
+    background: transparent;
+  }
+}

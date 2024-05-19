@@ -1,20 +1,25 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
-import RootLayout from "./pages/RootLayout"
-import paths from "./util/paths"
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import RootLayout from "./pages/RootLayout";
+import paths from "./util/paths";
+import { QueryClient } from "@tanstack/query-core";
+import { QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
+  const queryClient = new QueryClient();
 
   const router = createBrowserRouter([
     {
-      path: '/AsyncRace/',
+      path: "/AsyncRace/",
       element: <RootLayout />,
-      children: paths
-    }
-  ])
+      children: paths,
+    },
+  ]);
 
   return (
-    <RouterProvider router={router}/>
-  )
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;

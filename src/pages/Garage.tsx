@@ -1,9 +1,10 @@
-import SVGComponent from "../components/SVGComponent";
+import Track from "../components/Track";
+import TrackControl from "../components/TrackControl";
 
 function Garage() {
   return ( <section>
-    <div>Garage</div>
-    <SVGComponent />
+    <TrackControl />
+    <Track />
   </section> );
 }
 
