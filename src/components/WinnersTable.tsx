@@ -21,7 +21,6 @@ function WinnersTable() {
     (state: GlobalStateType) => state.Track.allWinners,
   );
   const [sortTypeToggle, setSortTypeToggle] = useState(false);
-  const [orderToggle, setorderToggle] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -53,29 +52,30 @@ function WinnersTable() {
   }, [currentWinnersPage, sortSelector.sortType, sortSelector.orderType]);
 
 
-  function handleSortWinner() {
-    setSortTypeToggle(prev => !prev);
+  function handleSort(typeSort:string) {
+    if(typeSort === 'time') {
+      if (sortTypeToggle) {
+        dispatch(trackActions.setSortType('time'));
+        dispatch(trackActions.setOrderType('ASC'));
+        setSortTypeToggle(prev => !prev);
+      } else {
+        dispatch(trackActions.setSortType('time'));
+        dispatch(trackActions.setOrderType('DESC'));
+        setSortTypeToggle(prev => !prev);
+      }      
+    }
+    if(typeSort === 'wins') {
+      if (sortTypeToggle) {
+        dispatch(trackActions.setSortType('wins'));
+        dispatch(trackActions.setOrderType('ASC'));
+        setSortTypeToggle(prev => !prev);
+      } else {
+        dispatch(trackActions.setSortType('wins'));
+        dispatch(trackActions.setOrderType('DESC'));
+        setSortTypeToggle(prev => !prev);
+      }      
+    }
   }
-  function handleOrderTime() {
-    dispatch(trackActions.setSortType('time'));
-    if(!orderToggle) {      
-      dispatch(trackActions.setOrderType('desc'))
-    } else {      
-      dispatch(trackActions.setOrderType('asc'))
-    }
-    setorderToggle(prev => !prev);
-   }
-   
-   function handleOrderWins() {
-    dispatch(trackActions.setSortType('wins'));
-    if(!orderToggle) {      
-      dispatch(trackActions.setOrderType('desc'))
-    } else {      
-      dispatch(trackActions.setOrderType('asc'))
-    }
-    setorderToggle(prev => !prev);
-   }
-  
   async function handleNextPage() {
     dispatch(trackActions.setNextPageWinners());
   }
@@ -90,8 +90,8 @@ function WinnersTable() {
             <th>ID</th>
             <th>CAR</th>
             <th>NAME</th>
-            <th onClick={!sortTypeToggle ? handleSortWinner : handleOrderWins}>WINS ⇅</th>
-            <th onClick={!sortTypeToggle ? handleOrderTime : handleSortWinner}>BEST TIME ⇅</th>
+            <th onClick={() => handleSort('wins')} className={sortSelector.sortType === 'wins' ? styles.active : undefined}>WINS ⇅</th>
+            <th onClick={() => handleSort('time')} className={sortSelector.sortType === 'time' ? styles.active : undefined}>BEST TIME ⇅</th>
           </tr>
         </thead>
         <tbody>

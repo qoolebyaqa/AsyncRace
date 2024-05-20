@@ -34,6 +34,11 @@
 .tableHead {
   cursor: pointer;
 }
+
+.active {
+  color: green;
+  border-bottom: 2px solid;
+}
 @media screen and (max-width: 660px) {
   .table {
     font-size: 18px;
