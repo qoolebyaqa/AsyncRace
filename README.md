@@ -1,6 +1,6 @@
 # Async-race
-- [Deployed-projec](https://qoolebyaqa.github.io/AsyncRace/)
-- Score: 330/460
+- [Deployed-project](https://qoolebyaqa.github.io/AsyncRace/)
+- Score: 340/460
 
 ## Checklist
 
@@ -59,7 +59,7 @@
 - [x] **Display Winners (15 points):** After some car wins it should be displayed at the "Winners view" table.
 - [x] **Pagination for Winners (10 points):** Implement pagination for the "Winners" view, with 10 winners per page.
 - [x] **Winners Table (10 points):** The table should include columns for the car's №, image, name, number of wins, and best time in seconds. If the same car wins more than once the number of wins should be incremented while best time should be saved only if it's better than the stored one.
-- [ ] **Sorting Functionality (10 points):** Allow users to sort the table by the number of wins and best time, in ascending or descending order.
+- [x] **Sorting Functionality (10 points):** Allow users to sort the table by the number of wins and best time, in ascending or descending order.
 
 ## 🏗️ Application Architecture (40 points)
 

@@ -11,13 +11,17 @@ function WinnersTable() {
   const winnersTable = useSelector(
     (state: GlobalStateType) => state.Track.winnersTable,
   );
+  const sortSelector = useSelector(
+    (state: GlobalStateType) => state.Track.winnersSort,
+  );
   const currentWinnersPage = useSelector(
     (state: GlobalStateType) => state.Track.currentWinnersPage,
   );
   const totalWinners = useSelector(
     (state: GlobalStateType) => state.Track.allWinners,
   );
-  const [ASC, setASC] = useState(false);
+  const [sortTypeToggle, setSortTypeToggle] = useState(false);
+  const [orderToggle, setorderToggle] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +31,7 @@ function WinnersTable() {
       dispatch(trackActions.setAllWinners(allWinners));
       const totalCars = await apiService.getCars();
       const visibleWinners = await apiService.getWinners(
-        queryForWinners(currentWinnersPage),
+        queryForWinners(currentWinnersPage, 10, sortSelector.sortType, sortSelector.orderType),
       );
       visibleWinners.map((winner) => {
         for (let i = 0; i < totalCars.length; i++) {
@@ -46,15 +50,31 @@ function WinnersTable() {
     }
 
     initWinnersFetching();
-  }, [currentWinnersPage]);
+  }, [currentWinnersPage, sortSelector.sortType, sortSelector.orderType]);
 
-  /* async function handleSortWinner() {
-    if (ASC) {
-      const sortedWinners = await apiService.getWinners(queryForWinners(currentWinnersPage, undefined, 'ASC', 'time'))
-      dispatch(trackActions.clearWinnerTable());
-      dispatch(trackActions.pushToWinnersTable());
+
+  function handleSortWinner() {
+    setSortTypeToggle(prev => !prev);
+  }
+  function handleOrderTime() {
+    dispatch(trackActions.setSortType('time'));
+    if(!orderToggle) {      
+      dispatch(trackActions.setOrderType('desc'))
+    } else {      
+      dispatch(trackActions.setOrderType('asc'))
     }
-  } */
+    setorderToggle(prev => !prev);
+   }
+   
+   function handleOrderWins() {
+    dispatch(trackActions.setSortType('wins'));
+    if(!orderToggle) {      
+      dispatch(trackActions.setOrderType('desc'))
+    } else {      
+      dispatch(trackActions.setOrderType('asc'))
+    }
+    setorderToggle(prev => !prev);
+   }
   
   async function handleNextPage() {
     dispatch(trackActions.setNextPageWinners());
@@ -66,12 +86,12 @@ function WinnersTable() {
     <div className={styles.tableContainer}>
       <table className={styles.table}>
         <thead>
-          <tr>
+          <tr className={styles.tableHead}>
             <th>ID</th>
             <th>CAR</th>
             <th>NAME</th>
-            <th>WINS</th>
-            <th>BEST TIME</th>
+            <th onClick={!sortTypeToggle ? handleSortWinner : handleOrderWins}>WINS ⇅</th>
+            <th onClick={!sortTypeToggle ? handleOrderTime : handleSortWinner}>BEST TIME ⇅</th>
           </tr>
         </thead>
         <tbody>

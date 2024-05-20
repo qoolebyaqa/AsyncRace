@@ -47,5 +47,6 @@ export type trackState = {
   winnersTable: winner[];
   currentWinnersPage: number;
   allWinners: winner[];
+  winnersSort: {sortType: string, orderType: string},
 };
 export type GlobalStateType = ReturnType<typeof store.getState>;

@@ -17,6 +17,7 @@ const trackSlice = createSlice({
     winnersTable: [],
     currentWinnersPage: 1,
     allWinners: [],
+    winnersSort: {sortType: 'time', orderType: 'ASC'},
   } as trackState,
   reducers: {
     setTotalCars(state, action) {
@@ -164,6 +165,12 @@ const trackSlice = createSlice({
     setAllWinners(state, action) {
       state.allWinners = action.payload;
     },
+    setSortType(state, action) {
+      state.winnersSort = {...state.winnersSort, sortType: action.payload}
+    },
+    setOrderType(state, action) {
+      state.winnersSort = {...state.winnersSort, orderType: action.payload}
+    }
   },
 });
 
