@@ -120,7 +120,7 @@ function WinnersTable() {
           <p>{currentWinnersPage}</p>
           <button
             onClick={handleNextPage}
-            disabled={currentWinnersPage === Math.ceil(totalWinners.length / 7)}
+            disabled={currentWinnersPage === Math.ceil(totalWinners.length / 10)}
           >↪
           </button>
         </div>
